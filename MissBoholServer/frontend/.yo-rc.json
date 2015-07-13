@@ -1,0 +1,8 @@
+{
+  "generator-react-webpack": {
+    "app-name": "frontend",
+    "architecture": "reflux",
+    "styles-language": "css",
+    "component-suffix": "js"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Miss Bohol Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "express-session": "^1.11.3",
+    "multer": "^0.1.8",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0",
+    "sequelize": "^3.3.2",
+    "sqlite3": "^3.0.8",
+    "uuid": "^2.0.1"
+  }
+}
