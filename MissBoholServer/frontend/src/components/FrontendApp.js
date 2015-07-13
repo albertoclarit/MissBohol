@@ -29,6 +29,8 @@ var FrontendApp = React.createClass({
                     </div>
                     <div id="navbar" className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
+                            <NavLink to="/judges">Judges</NavLink>
+                            <NavLink to="/candidates">Candidates</NavLink>
                             <NavLink to="/prelim">Preliminary</NavLink>
                             <NavLink to="/final">Final</NavLink>
                         </ul>

@@ -15,11 +15,20 @@ var Login = React.createClass({
         LoginActionCreators.Login(this.state.username, this.state.password);
     },
   render: function () {
+
+      var error = '';
+      if(this.props.query.error)
+      {
+          error = (
+          <div className="alert alert-danger"><strong>{this.props.query.error}</strong><br/></div>
+          );
+      }
+
     return (
         <div className="Login">
-
             <br/>
             <br/>
+            {error}
             <div className="row">
              <div className="col-md-6 col-md-offset-3">
 

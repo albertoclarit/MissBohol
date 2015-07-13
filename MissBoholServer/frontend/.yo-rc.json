@@ -1,6 +1,6 @@
 {
   "generator-react-webpack": {
-    "app-name": "frontend",
+    "app-name": "securedcandidates",
     "architecture": "reflux",
     "styles-language": "css",
     "component-suffix": "js"

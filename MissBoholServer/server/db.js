@@ -23,7 +23,15 @@ module.exports = function (sequelize) {
     });
 
 
-    Judge.sync({force: false});
+    Judge.sync({force: false}).then(function () {
+        // Table created
+        return Judge.create({
+            judgeNo: '999',
+            password: 'itsawesome'
+        });
+    }).catch(function(error) {
+      console.log('999 user already created');
+    });
 
     var Candidates = sequelize.define('candidates', {
         id: {
@@ -60,30 +68,37 @@ module.exports = function (sequelize) {
             primaryKey: true,
             autoIncrement: true
         },
-        candidateNo: {
-            type: Sequelize.INTEGER,
-            unique: true
-        },
         talent: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            defaultValue: 0
         },
         witintelligence: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            defaultValue: 0
         },
         gown: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            defaultValue: 0
         },
         swimsuit: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            defaultValue: 0
         }
     }, {
         freezeTableName: true // Model tableName will be the same as the model name
     });
 
+    Candidates.hasMany(Preliminaries,{onUpdate:'CASCADE', onDelete:'CASCADE'});
+
+    Preliminaries.sync({force: false});
+
+
 
 
 
     return {
-        Judge : Judge
+        Judge : Judge,
+        Preliminaries:Preliminaries,
+        Candidates:Candidates
     };
 }

@@ -5,7 +5,22 @@ var router = express.Router();
 
 
 router.get('/user', function(req, res,next) {
-    res.json({ username: 'albert', roles: ["ROLE_ADMIN"] })
+
+    var user  ={
+        judgeNo : req.user.judgeNo
+    }
+
+    if(user.judgeNo===999)
+    {
+        user.roles=['ROLE_ADMIN'];
+    }
+    else {
+        user.roles=['ROLE_USER'];
+    }
+
+    console.log(user);
+
+    res.json(user);
     next();
 });
 

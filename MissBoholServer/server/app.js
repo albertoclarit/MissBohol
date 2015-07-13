@@ -3,7 +3,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var multer = require('multer');
-var session = require('express-session')
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Sequelize = require('sequelize');
@@ -19,14 +20,12 @@ var sequelize = new Sequelize('database', 'username', 'password', {
     storage: 'data/missbohol.sqlite',
     define: {
         timestamps: false // true by default
-    }
+    },
+    logging: false
 });
 
 
 var db = require('./db')(sequelize);
-
-
-
 
 
 
@@ -36,23 +35,40 @@ passport.use(new LocalStrategy({
     passwordField: 'j_password'
     },
     function(username, password, done) {
+      var Judge=  db.Judge;
+        Judge.findOne({
+            where: {
+                judgeNo: username,
+                password:password
+            }
+        }).then(function(judge){
+            judge.password='';
+            done(null,judge);
 
-        //console.log('passport.use');
-      done(null,{id:'1',username: username, password: password});
+        }).catch(function(err){
+            done(err,false);
+        });
 
     }
 ));
 
 
 passport.serializeUser(function(user, done) {
-    //console.log('serializeUser');
   done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
 
-   // console.log('deserializeUser');
-    done(null, {id:'1',username: 'username', password: 'password'});
+    var Judge=  db.Judge;
+    Judge.findById(id).then(function(judge){
+
+        judge.password='';
+        done(null,judge);
+
+    }).catch(function(err){
+        done(err,false);
+    });
+
 });
 
 
@@ -62,14 +78,24 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(multer()); // for parsing multipart/form-data
 app.use(express.static('static'));
+
+/*
+ app.use(session({
+ genid: function(req) {
+ return require('uuid').v4();
+ },
+ secret: 'keyboard cat',
+ resave: false,
+ saveUninitialized: true
+ }));
+ */
+
+
 app.use(session({
-    genid: function(req) {
-        return require('uuid').v4();
-    },
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true
+    store: new FileStore(),
+    secret: 'iloveu'
 }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
