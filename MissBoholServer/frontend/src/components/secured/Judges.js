@@ -11,7 +11,7 @@ var Judges = React.createClass({
   render: function () {
     return (
         <div className="Judges">
-          <p>Content for Judges</p>
+            <legend>Judges</legend>
         </div>
       );
   }

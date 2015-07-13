@@ -18,7 +18,7 @@ router.get('/user', function(req, res,next) {
         user.roles=['ROLE_USER'];
     }
 
-    console.log(user);
+   // console.log(user);
 
     res.json(user);
     next();

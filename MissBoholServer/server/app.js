@@ -93,7 +93,9 @@ app.use(express.static('static'));
 
 app.use(session({
     store: new FileStore(),
-    secret: 'iloveu'
+    secret: 'iloveu',
+    resave: false,
+    saveUninitialized: true
 }));
 
 

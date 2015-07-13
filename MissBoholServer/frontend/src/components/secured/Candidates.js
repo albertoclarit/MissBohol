@@ -11,7 +11,7 @@ var Candidates = React.createClass({
   render: function () {
     return (
         <div className="Candidates">
-          <p>Content for Candidates</p>
+            <legend>Candidates</legend>
         </div>
       );
   }
