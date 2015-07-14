@@ -5,6 +5,8 @@ var ReactTransitionGroup = React.addons.TransitionGroup;
 
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
+var SessionActionCreators = require('../sessionmanager/SessionActionCreators');
+
 // CSS
 require('normalize.css');
 require('../styles/main.css');
@@ -12,6 +14,9 @@ var createActiveRouteComponent = require('react-router-active-component');
 var NavLink = createActiveRouteComponent('li');
 
 var FrontendApp = React.createClass({
+    Logout: function(){
+        SessionActionCreators.Logout();
+    },
   render: function() {
     return (
       <div className="main">
@@ -33,6 +38,7 @@ var FrontendApp = React.createClass({
                             <NavLink to="/candidates">Candidates</NavLink>
                             <NavLink to="/prelim">Preliminary</NavLink>
                             <NavLink to="/final">Final</NavLink>
+                            <li><a  onClick={this.Logout}>Logout</a></li>
                         </ul>
                     </div>
                 </div>

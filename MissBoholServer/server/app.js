@@ -9,6 +9,12 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Sequelize = require('sequelize');
 
+var cookieParser = require('cookie-parser');
+var csurf = require('csurf');
+
+
+
+
 var sequelize = new Sequelize('database', 'username', 'password', {
     dialect: 'sqlite',
     pool: {
@@ -90,12 +96,39 @@ app.use(express.static('static'));
  }));
  */
 
+app.use(cookieParser());
+/*app.use(csurf({ cookie: { key :'CSRF-TOKEN'},
+    value : function(req){
+
+                var csrf = (req.headers['x-csrf-token']);
+                console.log(req.headers);
+                return  csrf;
+             }
+       }));*/
+
+// not working
+/*app.use(csurf());
+app.use(function(req, res, next) {
+    res.cookie('CSRF-TOKEN', req.csrfToken());
+    return next();
+});*/
+
+// error handler
+app.use(function (err, req, res, next) {
+    if (err.code !== 'EBADCSRFTOKEN') return next(err)
+
+    // handle CSRF token errors here
+    res.status(403)
+    res.send('Wrong CSRF Value: Expected '  + req.csrfToken());
+})
+
 
 app.use(session({
     store: new FileStore(),
     secret: 'iloveu',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true/*,
+    cookie: { maxAge: (1000 * 60) }*///expires: new Date(Date.now() + (1000 * 60))
 }));
 
 
@@ -127,6 +160,12 @@ app.use('/api/users',ensureAuthenticated,users);
 app.get('/api/public/ping', function (req, res) {
   res.send('OK');
 });
+
+
+
+
+
+
 
 
 var server = app.listen(3000, function () {
