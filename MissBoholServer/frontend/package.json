@@ -16,6 +16,7 @@
     "jquery": "^2.1.4",
     "lodash": "^3.10.0",
     "normalize.css": "~3.0.3",
+    "rc-form-validation": "^2.4.6",
     "react": "0.13.x",
     "react-router": "0.13.x",
     "react-router-active-component": "^2.0.0",

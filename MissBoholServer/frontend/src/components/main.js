@@ -16,6 +16,8 @@ var Judges = require('./secured/Judges');
 
 require('script!jquery/dist/jquery.min.js');
 require('bootstrap/dist/css/bootstrap.min.css');
+require('script!bootstrap/dist/js/bootstrap.min.js');
+
 
 var SessionStore =  require('../sessionmanager/SessionStore');
 var SessionActionCreators = require('../sessionmanager/SessionActionCreators');

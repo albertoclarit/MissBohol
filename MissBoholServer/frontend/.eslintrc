@@ -9,7 +9,8 @@
   "env": {
     "browser": true,
     "amd": true,
-    "es6": true
+    "es6": true,
+    "node":true
   },
   "rules": {
       "quotes": [ 1, "single" ],

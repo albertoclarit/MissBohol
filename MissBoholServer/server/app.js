@@ -138,9 +138,7 @@ app.use(passport.session());
 
 var api= require('./api')(passport);
 var users = require('./users');
-
-
-app.use('/api', api);
+var judges = require('./judges')(db.Judge);
 
 
 
@@ -152,10 +150,9 @@ function ensureAuthenticated(req, res, next) {
 }
 
 
-
+app.use('/api', api);
 app.use('/api/users',ensureAuthenticated,users);
-
-
+app.use('/api/judges',ensureAuthenticated,judges);
 
 app.get('/api/public/ping', function (req, res) {
   res.send('OK');
