@@ -18,10 +18,12 @@ var JudgeForm = React.createClass({
         password: Joi.string().required().label('Password')
     },
     getInitialState: function() {
-        return {
-            judgeNo: this.props.judgeNo,
-            password: this.props.password
-        };
+        /*return {
+            judgeNo: this.props.judge.judgeNo,
+            password: this.props.judge.password,
+            id: this.props.judge.id
+        };*/
+        return this.props.judge;
     },
 
   componentDidMount: function() {
@@ -42,6 +44,8 @@ var JudgeForm = React.createClass({
         this.validate(onValidate);
     },
   render: function () {
+
+      var savelabel = this.state._entity ? 'Save Changes' : 'Add Judge';
     return (
         <div className="JudgeForm">
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
@@ -61,16 +65,16 @@ var JudgeForm = React.createClass({
                                               </div>
                                           </div>
                                             <div className={this.getClasses('password')}>
-                                                <label className="control-label col-md-2">Password</label>
+                                                <label className="control-label col-md-2">Password </label>
                                                 <div className="col-md-10">
-                                                    <input type="password" className="form-control" valueLink={this.linkState('password')} />
+                                                    <input type="text" className="form-control" valueLink={this.linkState('password')} />
                                                     {this.getValidationMessages('password').map(this.renderHelpText)}
                                                 </div>
                                             </div>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" className="btn btn-primary">Save changes</button>
+                                    <button type="submit" className="btn btn-primary">{savelabel}</button>
                                 </div>
                             </div>
                         </div>

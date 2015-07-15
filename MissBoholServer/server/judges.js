@@ -70,6 +70,26 @@ module.exports = function (Judge) {
     });
 
 
+    router.delete('/:id', function(req, res,next) {
+
+        Judge.findById(req.params.id).then(function(judge){
+            if(judge==null)
+            {
+                res.sendStatus(404);
+                next();
+            }
+
+            judge.destroy().then(function(judge) {
+                res.status(200).json(judge);
+            });
+
+
+
+        }).catch(function(error){
+            res.sendStatus(404);
+        });
+
+    });
 
 
     return router;

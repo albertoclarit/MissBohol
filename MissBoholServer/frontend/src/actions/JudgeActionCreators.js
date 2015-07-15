@@ -5,8 +5,10 @@ var Reflux = require('reflux');
 var JudgeActionCreators  =  Reflux.createActions([
  'RefreshList',
  'NewJudge',
+  'EditJudge',
  'CloseDialog',
- 'SaveJudge'
+ 'SaveJudge',
+  'DeleteJudge'
 ]);
 
 

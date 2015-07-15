@@ -27,6 +27,7 @@ var JudgeStore = Reflux.createStore({
 
           judgesList.forEach(function(judgeEntity) {
               var judge = judgeEntity.data();
+              judge._entity = judgeEntity;
              store.list.push(judge);
           });
 
@@ -47,12 +48,37 @@ var JudgeStore = Reflux.createStore({
     },
     onSaveJudge: function(judge){
 
+
         var judges = api.all('judges');
-        judges.post(judge).then(function(){
+
+        if(!judge.id){
+            judges.post(judge).then(function(){
+                Actions.RefreshList();
+            }).catch(function(){
+            });
+        }
+        else {
+            judges.put(judge.id, judge).then(function(){
+                Actions.RefreshList();
+            }).catch(function(){
+            });
+        }
+
+
+    },
+    onEditJudge: function(judge){
+
+        store.selected = judge;
+        store.showDialog = true;
+        JudgeStore.trigger(store);
+    },
+    onDeleteJudge: function(judge){
+
+        var judges = api.all('judges');
+        judges.delete(judge.id, judge).then(function(){
             Actions.RefreshList();
         }).catch(function(){
         });
-
     }
 
 });

@@ -10,6 +10,7 @@ var SessionActionCreators = require('../sessionmanager/SessionActionCreators');
 // CSS
 require('normalize.css');
 require('../styles/main.css');
+
 var createActiveRouteComponent = require('react-router-active-component');
 var NavLink = createActiveRouteComponent('li');
 
@@ -44,9 +45,7 @@ var FrontendApp = React.createClass({
                 </div>
             </nav>
             <div className="container">
-
                 <RouteHandler/>
-
             </div>
 
 
