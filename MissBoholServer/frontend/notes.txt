@@ -1,0 +1,5 @@
+npm install https://github.com/travelio/node-isemail.git --save
+
+--no longer required --
+---npm install -g dns
+

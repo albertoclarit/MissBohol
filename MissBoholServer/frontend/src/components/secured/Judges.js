@@ -24,7 +24,7 @@ var Judges = React.createClass({
         var list = this.state.list.map(function(judge){
 
             return (
-                <tr>
+                <tr key={judge.id}>
                     <td>{judge.judgeNo}</td>
                     <td>{judge.password}</td>
                 </tr>

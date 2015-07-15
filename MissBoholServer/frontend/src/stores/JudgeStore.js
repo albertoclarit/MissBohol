@@ -44,6 +44,15 @@ var JudgeStore = Reflux.createStore({
         store.selected = {};
         store.showDialog = false;
         JudgeStore.trigger(store);
+    },
+    onSaveJudge: function(judge){
+
+        var judges = api.all('judges');
+        judges.post(judge).then(function(){
+            Actions.RefreshList();
+        }).catch(function(){
+        });
+
     }
 
 });
