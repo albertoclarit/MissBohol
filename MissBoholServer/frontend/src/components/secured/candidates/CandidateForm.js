@@ -13,6 +13,7 @@ var CandidateForm = React.createClass({
     mixins: [ValidationMixin, React.addons.LinkedStateMixin, BootstrapValidationMixin],
     validatorTypes: {
         candidateNo: Joi.number().required().label('Candidate No'),
+        age: Joi.number().required().label('Age'),
         lastname: Joi.string().required().label('Lastname'),
         firstname: Joi.string().required().label('Firstname'),
         representation: Joi.string().required().label('Representation')
@@ -48,33 +49,40 @@ var CandidateForm = React.createClass({
                         <div className="modal-content">
                             <div className="modal-header">
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 className="modal-title" id="myModalLabel">Add/Edit Judge</h4>
+                                <h4 className="modal-title" id="myModalLabel">Add/Edit Candidate</h4>
                             </div>
                             <div className="modal-body">
                                 <div className={this.getClasses('candidateNo')}>
-                                    <label className="control-label col-md-2">Candidate No</label>
-                                    <div className="col-md-10">
+                                    <label className="control-label col-md-3">Candidate No</label>
+                                    <div className="col-md-9">
                                         <input type="text" className="form-control" valueLink={this.linkState('candidateNo')}/>
                                         {this.getValidationMessages('candidateNo').map(this.renderHelpText)}
                                     </div>
                                 </div>
                                 <div className={this.getClasses('lastname')}>
-                                    <label className="control-label col-md-2">Lastname </label>
-                                    <div className="col-md-10">
+                                    <label className="control-label col-md-3">Lastname </label>
+                                    <div className="col-md-9">
                                         <input type="text" className="form-control" valueLink={this.linkState('lastname')} />
                                         {this.getValidationMessages('lastname').map(this.renderHelpText)}
                                     </div>
                                 </div>
                                 <div className={this.getClasses('firstname')}>
-                                    <label className="control-label col-md-2">Firstname </label>
-                                    <div className="col-md-10">
+                                    <label className="control-label col-md-3">Firstname </label>
+                                    <div className="col-md-9">
                                         <input type="text" className="form-control" valueLink={this.linkState('firstname')} />
                                         {this.getValidationMessages('firstname').map(this.renderHelpText)}
                                     </div>
                                 </div>
+                                <div className={this.getClasses('age')}>
+                                    <label className="control-label col-md-3">Age</label>
+                                    <div className="col-md-9">
+                                        <input type="text" className="form-control" valueLink={this.linkState('age')}/>
+                                        {this.getValidationMessages('age').map(this.renderHelpText)}
+                                    </div>
+                                </div>
                                 <div className={this.getClasses('representation')}>
-                                    <label className="control-label col-md-2">Representation </label>
-                                    <div className="col-md-10">
+                                    <label className="control-label col-md-3">Representation </label>
+                                    <div className="col-md-9">
                                         <input type="text" className="form-control" valueLink={this.linkState('representation')} />
                                         {this.getValidationMessages('representation').map(this.renderHelpText)}
                                     </div>

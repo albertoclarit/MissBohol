@@ -52,7 +52,7 @@ var CandidatesStore = Reflux.createStore({
         var candidates = api.all('candidates');
 
         if(!candidate.id){
-            candidate.post(candidate).then(function(){
+            candidates.post(candidate).then(function(){
                 Actions.RefreshList();
             }).catch(function(){
             });

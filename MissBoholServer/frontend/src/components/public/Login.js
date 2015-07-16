@@ -39,14 +39,14 @@ var Login = React.createClass({
                          <div className="panel-body">
                              <form className="form-horizontal">
                                  <div className="form-group">
-                                     <label htmlFor="username" className="col-md-2 control-label">Username</label>
-                                     <div className="col-md-10">
-                                         <input type="username" className="form-control" id="username" placeholder="Username" valueLink={this.linkState('username')} />
+                                     <label htmlFor="username" className="col-md-3 control-label">Judge No</label>
+                                     <div className="col-md-9">
+                                         <input type="username" className="form-control" id="username" placeholder="Judge No" valueLink={this.linkState('username')} />
                                          </div>
                                   </div>
                                  <div className="form-group">
-                                     <label htmlFor="password" className="col-md-2 control-label">Password</label>
-                                     <div className="col-md-10">
+                                     <label htmlFor="password" className="col-md-3 control-label">Password</label>
+                                     <div className="col-md-9">
                                          <input type="password" className="form-control" id="password" placeholder="Password" valueLink={this.linkState('password')}/>
                                      </div>
                                  </div>

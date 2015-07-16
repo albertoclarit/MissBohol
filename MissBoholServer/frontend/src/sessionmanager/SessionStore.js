@@ -64,8 +64,14 @@ var UserConfig = {
     }
 };
 
+var store = {
+    currentUser: undefined
+};
 SessionStore = Reflux.createStore({
     listenables: Actions,
+    getInitialState: function() {
+        return store;
+    },
     onPing: function(){
 
         axios.get('/api/public/ping').then(function () {
@@ -90,7 +96,10 @@ SessionStore = Reflux.createStore({
        }
        else
        {
-           SessionStore.router.transitionTo('/');
+           SessionStore.getUserData().then(function(){
+               SessionStore.router.transitionTo('/');
+           });
+
        }
    },
    onLoginFailure: function(){
@@ -102,6 +111,8 @@ SessionStore = Reflux.createStore({
         console.log('Logout completed');
         localStorage.removeItem('loggedtoken');
         Actions.Ping();
+        store.currentUser = undefined;
+        SessionStore.trigger(store);
         SessionStore.router.transitionTo('/login', {}, { error: 'Successfully Logged-out' });
 
     },
@@ -109,6 +120,8 @@ SessionStore = Reflux.createStore({
         console.log('Logout failed');
         localStorage.removeItem('loggedtoken');
         Actions.Ping();
+        store.currentUser = undefined;
+        SessionStore.trigger(store);
         SessionStore.router.transitionTo('/login');
     },
     onCatchError: function(){
@@ -139,8 +152,10 @@ SessionStore = Reflux.createStore({
           }).then(function (response) {
               var data = response.data;
 
-             data = _.assign(data, UserConfig);
+              data = _.assign(data, UserConfig);
 
+               store.currentUser = data;
+               SessionStore.trigger(store);
                d.resolve(data, response);
             })
             .catch(function (response) {

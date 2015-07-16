@@ -2,10 +2,11 @@
 
 var React = require('react/addons');
 var ReactTransitionGroup = React.addons.TransitionGroup;
-
+var Reflux = require('reflux');
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
 var SessionActionCreators = require('../sessionmanager/SessionActionCreators');
+var SessionStore = require('../sessionmanager/SessionStore');
 
 // CSS
 require('normalize.css');
@@ -15,10 +16,58 @@ var createActiveRouteComponent = require('react-router-active-component');
 var NavLink = createActiveRouteComponent('li');
 
 var FrontendApp = React.createClass({
+    mixins: [Reflux.connect(SessionStore)],
+    componentDidMount: function() {
+        $('.navbar-collapse a').click(function(){
+            $('.navbar-collapse').collapse('hide');
+        });
+    },
+    componentDidUpdate: function() {
+        $('.navbar-collapse a').click(function(){
+            $('.navbar-collapse').collapse('hide');
+        });
+    },
     Logout: function(){
         SessionActionCreators.Logout();
     },
   render: function() {
+
+      var menuitem = null;
+
+
+      //console.log(this.state);
+      if(this.state.currentUser){
+
+          if(this.state.currentUser.isInRole('ROLE_ADMIN')){
+              menuitem = (
+                  <ul className="nav navbar-nav">
+                      <NavLink to="/judges">Judges</NavLink>
+                      <NavLink to="/candidates">Candidates</NavLink>
+                      <NavLink to="/prelim">Preliminary Round</NavLink>
+                      <NavLink to="/final">Final Round</NavLink>
+                      <li><a href="#/" onClick={this.Logout}>Logout</a></li>
+                  </ul>
+              );
+          }
+          else
+          {
+              menuitem = (
+                  <ul className="nav navbar-nav">
+                      <NavLink to="/prelimjudge">Preliminary Round</NavLink>
+                      <NavLink to="/finaljudge">Final Round</NavLink>
+                      <li><a  onClick={this.Logout}>Logout</a></li>
+                  </ul>
+              );
+          }
+      }
+      else {
+          menuitem = (
+              <ul className="nav navbar-nav">
+                  <NavLink to="/login">Login</NavLink>
+              </ul>
+          );
+      }
+
     return (
       <div className="main">
         <ReactTransitionGroup transitionName="fade">
@@ -34,13 +83,7 @@ var FrontendApp = React.createClass({
                         <a className="navbar-brand" href="#">Miss Bohol</a>
                     </div>
                     <div id="navbar" className="collapse navbar-collapse">
-                        <ul className="nav navbar-nav">
-                            <NavLink to="/judges">Judges</NavLink>
-                            <NavLink to="/candidates">Candidates</NavLink>
-                            <NavLink to="/prelim">Preliminary</NavLink>
-                            <NavLink to="/final">Final</NavLink>
-                            <li><a  onClick={this.Logout}>Logout</a></li>
-                        </ul>
+                        {menuitem}
                     </div>
                 </div>
             </nav>

@@ -56,9 +56,10 @@ var Candidates = React.createClass({
                   <td>{candidate.candidateNo}</td>
                   <td>{candidate.lastname}</td>
                   <td>{candidate.firstname}</td>
+                  <td>{candidate.age}</td>
                   <td>{candidate.representation}</td>
-                  <td><button type="button" className="btn btn-sm btn-warning" onClick={()=>{CandidatesActionCreators.EditJudge(judge); }}>Edit</button>&nbsp;
-                      <button type="button" className="btn btn-sm btn-danger" onClick={self.deleteCandidate.bind(self, judge)}>Delete</button></td>
+                  <td><button type="button" className="btn btn-sm btn-warning" onClick={()=>{CandidatesActionCreators.EditCandidate(candidate); }}>Edit</button>&nbsp;
+                      <button type="button" className="btn btn-sm btn-danger" onClick={self.deleteCandidate.bind(self, candidate)}>Delete</button></td>
               </tr>
           );
       });
@@ -72,6 +73,7 @@ var Candidates = React.createClass({
                     <th>Candidate No.</th>
                     <th>Lastname</th>
                     <th>First Name</th>
+                    <th>Age</th>
                     <th>Representation</th>
                     <th>#</th>
                 </tr>

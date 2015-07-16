@@ -44,6 +44,9 @@ module.exports = function (sequelize) {
             type: Sequelize.INTEGER,
             unique: true
         },
+        age: {
+            type: Sequelize.INTEGER
+        },
         lastname: {
             type: Sequelize.STRING
         },

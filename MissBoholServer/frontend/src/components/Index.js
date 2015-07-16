@@ -12,7 +12,7 @@ var Index = React.createClass({
     return (
         <div className="Index">
             <div className="starter-template">
-                <h1>Miss Bohol Tabulation Management Page</h1>
+                <h1>Miss Bohol 2015 Tabulation System</h1>
                 <p className="lead">Sponsored By Cristal e-College.</p>
             </div>
         </div>
