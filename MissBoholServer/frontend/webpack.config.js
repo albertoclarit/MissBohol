@@ -67,5 +67,9 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ]
-
+,
+    node: {
+        dns: 'mock',
+        net: 'mock'
+    }
 };

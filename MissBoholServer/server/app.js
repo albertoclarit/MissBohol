@@ -139,7 +139,7 @@ app.use(passport.session());
 var api= require('./api')(passport);
 var users = require('./users');
 var judges = require('./judges')(db.Judge);
-
+var candidates = require('./candidates')(db.Candidates);
 
 
 function ensureAuthenticated(req, res, next) {
@@ -153,6 +153,7 @@ function ensureAuthenticated(req, res, next) {
 app.use('/api', api);
 app.use('/api/users',ensureAuthenticated,users);
 app.use('/api/judges',ensureAuthenticated,judges);
+app.use('/api/candidates',ensureAuthenticated,candidates);
 
 app.get('/api/public/ping', function (req, res) {
   res.send('OK');

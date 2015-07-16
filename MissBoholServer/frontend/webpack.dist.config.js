@@ -70,5 +70,9 @@ module.exports = {
             test: /\.scss$/,
             loader: "style!css!sass"
         }]
-  }
+  },
+    node: {
+    dns: 'mock',
+    net: 'mock'
+   }
 };
