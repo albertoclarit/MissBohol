@@ -92,7 +92,7 @@ module.exports = function (sequelize) {
     });
 
     Candidates.hasMany(Preliminaries,{onUpdate:'CASCADE', onDelete:'CASCADE'});
-
+    Judge.hasMany(Preliminaries,{onUpdate:'CASCADE', onDelete:'CASCADE'});
     Preliminaries.sync({force: false});
 
 

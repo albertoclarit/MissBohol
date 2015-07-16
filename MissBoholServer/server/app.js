@@ -142,6 +142,9 @@ var api= require('./api')(passport);
 var users = require('./users');
 var judges = require('./judges')(db.Judge);
 var candidates = require('./candidates')(db.Candidates);
+var preliminaries = require('./preliminaries')(sequelize,db.Candidates,db.Judge,db.Preliminaries);
+
+
 
 
 function ensureAuthenticated(req, res, next) {
@@ -156,6 +159,8 @@ app.use('/api', api);
 app.use('/api/users',ensureAuthenticated,users);
 app.use('/api/judges',ensureAuthenticated,judges);
 app.use('/api/candidates',ensureAuthenticated,candidates);
+app.use('/api/preliminaries',ensureAuthenticated,preliminaries);
+
 
 app.get('/api/public/ping', function (req, res) {
   res.send('OK');
