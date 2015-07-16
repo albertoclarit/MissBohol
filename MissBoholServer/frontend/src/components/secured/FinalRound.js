@@ -1,14 +1,14 @@
 'use strict';
 
 var React = require('react/addons');
-
+var SessionStore = require('../../sessionmanager/SessionStore');
 //var Actions = require('actions/xxx')
 
 require('styles/secured/FinalRound.css');
-var SessionStore = require('../../sessionmanager/SessionStore');
+
 
 var FinalRound = React.createClass({
-    mixins: [SessionStore.authenticate(['ROLE_ADMIN'])],
+    mixins: [SessionStore.authenticate(['ROLE_USER'])],
   render: function () {
     return (
         <div className="FinalRound">

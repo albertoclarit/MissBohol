@@ -25,6 +25,7 @@
     "react": "0.13.x",
     "react-router": "0.13.x",
     "react-router-active-component": "^2.0.0",
+    "react-tap-event-plugin": "^0.1.7",
     "react-validation-mixin": "^4.2.0",
     "reflux": "^0.2.7",
     "restful.js": "^0.7.0",

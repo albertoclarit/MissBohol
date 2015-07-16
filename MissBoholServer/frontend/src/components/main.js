@@ -9,10 +9,13 @@ var DefaultRoute = Router.DefaultRoute;
 var Login = require('./public/Login');
 var Index = require('./Index');
 var Unauthorized = require('./public/Unauthorized');
-var FinalRound = require('./secured/FinalRound');
+var Final = require('./secured/Final');
 var Preliminary = require('./secured/Preliminary');
 var Candidates = require('./secured/Candidates');
 var Judges = require('./secured/Judges');
+
+var PrelimRound = require('./secured/PrelimRound');
+var FinalRound = require('./secured/FinalRound');
 
 require('script!jquery/dist/jquery.min.js');
 require('bootstrap/dist/css/bootstrap.min.css');
@@ -24,6 +27,10 @@ require('script!sweetalert/dist/sweetalert.min.js');
 var SessionStore =  require('../sessionmanager/SessionStore');
 var SessionActionCreators = require('../sessionmanager/SessionActionCreators');
 
+var injectTapEventPlugin = require('react-tap-event-plugin');
+injectTapEventPlugin();
+
+
 var content = document.getElementById('content');
 
 var Routes = (
@@ -34,7 +41,9 @@ var Routes = (
             <Route  path ="/judges" handler={Judges}/>
             <Route  path ="/candidates" handler={Candidates}/>
             <Route  path ="/prelim" handler={Preliminary}/>
-            <Route  path ="/final" handler={FinalRound}/>
+            <Route  path ="/final" handler={Final}/>
+            <Route  path ="/prelimround" handler={PrelimRound}/>
+            <Route  path ="/finalround" handler={FinalRound}/>
             <DefaultRoute handler={Index}/>
         </Route>
 

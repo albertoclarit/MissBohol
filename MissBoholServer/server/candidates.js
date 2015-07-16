@@ -6,6 +6,7 @@ var router = express.Router();
 module.exports = function (Candidates) {
 
 
+
     // get the list of candidates
     router.get('/', function(req, res,next) {
 

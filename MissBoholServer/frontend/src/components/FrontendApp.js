@@ -53,8 +53,8 @@ var FrontendApp = React.createClass({
           {
               menuitem = (
                   <ul className="nav navbar-nav">
-                      <NavLink to="/prelimjudge">Preliminary Round</NavLink>
-                      <NavLink to="/finaljudge">Final Round</NavLink>
+                      <NavLink to="/prelimround">Preliminary Round</NavLink>
+                      <NavLink to="/finalround">Final Round</NavLink>
                       <li><a  onClick={this.Logout}>Logout</a></li>
                   </ul>
               );

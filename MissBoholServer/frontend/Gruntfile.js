@@ -32,7 +32,8 @@ module.exports = function (grunt) {
         publicPath: '/assets/',
         contentBase: './<%= pkg.src %>/',
          proxy: {
-              "/api*":"http://localhost:3000"
+              "/api*":"http://localhost:3000",
+             "/images*":"http://localhost:3000"
           },
 
           historyApiFallback: true
