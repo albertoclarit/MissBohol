@@ -26,14 +26,14 @@ var FinalRound = React.createClass({
         var newValue = React.findDOMNode(this.refs.finalinterview).value;
         var state = this.state.currentFinalData;
         state.finalinterview = newValue;
-        FinalActionCreators.EditPreliminary(state);
+        FinalActionCreators.EditFinal(state);
         this.setState(this.state);
     },
     beautypoisecharmChanged: function(){
         var newValue = React.findDOMNode(this.refs.beautypoisecharm).value;
         var state = this.state.currentFinalData;
         state.beautypoisecharm = newValue;
-        FinalActionCreators.EditPreliminary(state);
+        FinalActionCreators.EditFinal(state);
         this.setState(this.state);
     },
     render: function () {

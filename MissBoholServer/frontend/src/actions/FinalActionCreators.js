@@ -3,6 +3,9 @@
 var Reflux = require('reflux');
 
 var FinalActionCreators  =  Reflux.createActions([
+    'Init',
+    'ResetFinalist',
+    'EditFinal'
 ]);
 
 

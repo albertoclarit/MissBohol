@@ -52,6 +52,15 @@ var PrelimRound = React.createClass({
       var prelimData = null;
 
 
+      if(this.state.locked)
+      {
+          return (
+              <div className="alert alert-danger">
+                  This section is now locked
+              </div>
+          );
+      }
+
 
 
       if(this.state.currentPrelimData){

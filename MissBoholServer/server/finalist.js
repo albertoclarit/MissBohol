@@ -7,6 +7,27 @@ var Promise = require("bluebird");
 module.exports = function (sequelize,Candidates,Judges,Finalist) {
 
 
+    router.get('/summaries', function(req, res,next) {
+
+        ///http://www.buildmystring.com/
+        var sb = "select c.id, c.lastname, c.firstname, c.candidateNo, avg(finalinterview) as finalinterviewaverage, avg(beautypoisecharm) as beautypoisecharmaverage, " +
+            "(avg(finalinterview) + avg(beautypoisecharm)) as totalaverage  from finalist p, " +
+            "candidates c  where " +
+            "p.candidateId = c.id " +
+            "group by candidateId order by totalaverage desc";
+
+
+
+        sequelize.query(sb, { type: sequelize.QueryTypes.SELECT})
+            .then(function(results){
+                res.json(results);
+            }).catch(function(err){
+                console.log(err);
+                res.sendStatus(404);
+            });
+    });
+
+
 
     router.get('/', function(req, res,next) {
 
@@ -93,6 +114,30 @@ module.exports = function (sequelize,Candidates,Judges,Finalist) {
         });
 
     });
+
+
+
+    router.put('/:id', function(req, res,next) {
+
+        Finalist.findById(req.params.id).then(function(finalist){
+            if(finalist==null)
+            {
+                res.sendStatus(404);
+                next();
+            }
+
+            finalist.updateAttributes(req.body).then(function(finalist) {
+                res.status(200).json(finalist);
+            });
+
+
+
+        }).catch(function(error){
+            res.sendStatus(404);
+        });
+
+    });
+
 
 
     return router;

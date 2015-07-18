@@ -5,6 +5,8 @@ var PrelimRoundActionCreators = require('../actions/PrelimRoundActionCreators');
 var SessionStore = require('../sessionmanager/SessionStore');
 var api = SessionStore.getApiResource();
 
+
+
 var store = {
     list: [],
     listEntity: [],
@@ -13,7 +15,8 @@ var store = {
     hasPrevious: false,
     currentIndex: -1,
     totalCandidates: 0,
-    currentPrelimData: undefined
+    currentPrelimData: undefined,
+    locked: false
 };
 
 
@@ -33,6 +36,10 @@ var PrelimRoundStore = Reflux.createStore({
 
           candidateList.forEach(function(candidateEntity) {
               var candidate = candidateEntity.data();
+              if(candidate.finalist > 0)
+              {
+                  store.locked = true;
+              }
               candidate._entity = candidateEntity;
               store.list.push(candidate);
               store.listEntity.push(candidateEntity);

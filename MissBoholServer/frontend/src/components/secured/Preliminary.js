@@ -29,7 +29,7 @@ var Preliminary = React.createClass({
     },
     resetTalent: function(){
         swal({   title: 'Are you sure?',
-                text: 'You will not be able to recover thes record!',
+                text: 'You will not be able to recover this record!',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#DD6B55',
@@ -46,7 +46,7 @@ var Preliminary = React.createClass({
     },
     resetGown: function(){
         swal({   title: 'Are you sure?',
-                text: 'You will not be able to recover thes record!',
+                text: 'You will not be able to recover this record!',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#DD6B55',
@@ -63,7 +63,7 @@ var Preliminary = React.createClass({
     },
     resetSwimsuit: function(){
         swal({   title: 'Are you sure?',
-                text: 'You will not be able to recover thes record!',
+                text: 'You will not be able to recover this record!',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#DD6B55',
@@ -80,7 +80,7 @@ var Preliminary = React.createClass({
     },
     resetInterview: function(){
         swal({   title: 'Are you sure?',
-                text: 'You will not be able to recover thes record!',
+                text: 'You will not be able to recover this record!',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#DD6B55',
