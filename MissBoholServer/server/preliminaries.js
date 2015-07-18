@@ -6,6 +6,57 @@ var Promise = require("bluebird");
 
 module.exports = function (sequelize,Candidates,Judges,Preliminaries) {
 
+    router.get('/bestswimsuit', function(req, res,next) {
+        var sb = "select c.id, c.lastname, c.firstname, c.candidateNo, avg(swimsuit) as swimsuitaverage from preliminaries p, " +
+            "candidates c  where " +
+            "p.candidateId = c.id " +
+            "group by candidateId order by swimsuitaverage desc";
+
+        sequelize.query(sb, { type: sequelize.QueryTypes.SELECT})
+            .then(function(results){
+                res.json(results);
+            }).catch(function(err){
+                console.log(err);
+                res.sendStatus(404);
+            });
+
+    });
+
+
+    router.get('/bestgown', function(req, res,next) {
+        var sb = "select c.id, c.lastname, c.firstname, c.candidateNo, avg(gown) as gownaverage from preliminaries p, " +
+            "candidates c  where " +
+            "p.candidateId = c.id " +
+            "group by candidateId order by gownaverage desc";
+
+        sequelize.query(sb, { type: sequelize.QueryTypes.SELECT})
+            .then(function(results){
+                res.json(results);
+            }).catch(function(err){
+                console.log(err);
+                res.sendStatus(404);
+            });
+
+    });
+
+
+    router.get('/bestinterview', function(req, res,next) {
+        var sb = "select c.id, c.lastname, c.firstname, c.candidateNo, avg(witintelligence) as witavarage from preliminaries p, " +
+            "candidates c  where " +
+            "p.candidateId = c.id " +
+            "group by candidateId order by witavarage desc";
+
+        sequelize.query(sb, { type: sequelize.QueryTypes.SELECT})
+            .then(function(results){
+                res.json(results);
+            }).catch(function(err){
+                console.log(err);
+                res.sendStatus(404);
+            });
+
+    });
+
+
 
     router.get('/summaries', function(req, res,next) {
 
