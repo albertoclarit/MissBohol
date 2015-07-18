@@ -17,6 +17,12 @@ var Judges = require('./secured/Judges');
 var PrelimRound = require('./secured/PrelimRound');
 var FinalRound = require('./secured/FinalRound');
 
+
+var BestGown = require('./secured/BestGown');
+var BestSwimsuit = require('./secured/BestSwimsuit');
+var BestInterview = require('./secured/BestInterview');
+
+
 require('script!jquery/dist/jquery.min.js');
 require('bootstrap/dist/css/bootstrap.min.css');
 require('script!bootstrap/dist/js/bootstrap.min.js');
@@ -44,10 +50,11 @@ var Routes = (
             <Route  path ="/final" handler={Final}/>
             <Route  path ="/prelimround" handler={PrelimRound}/>
             <Route  path ="/finalround" handler={FinalRound}/>
+            <Route  path ="/bestswimsuit" handler={BestSwimsuit}/>
+            <Route  path ="/bestgown" handler={BestGown}/>
+            <Route  path ="/bestinterview" handler={BestInterview}/>
             <DefaultRoute handler={Index}/>
         </Route>
-
-
     </Route>
 );
 
