@@ -44,6 +44,9 @@ var FrontendApp = React.createClass({
                       <NavLink to="/judges">Judges</NavLink>
                       <NavLink to="/candidates">Candidates</NavLink>
                       <NavLink to="/prelim">Preliminary Round</NavLink>
+                      <NavLink to="/bestswimsuit">Best Swimsuit</NavLink>
+                      <NavLink to="/bestgown">Best Gown</NavLink>
+                      <NavLink to="/bestinterview">Best In Interview</NavLink>
                       <NavLink to="/final">Final Round</NavLink>
                       <li><a href="#/" onClick={this.Logout}>Logout</a></li>
                   </ul>

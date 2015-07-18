@@ -7,11 +7,13 @@ var api = SessionStore.getApiResource();
 
 var store = {
     list: [],
+    listEntity: [],
     currentCandidate: undefined,
     hasNext: false,
     hasPrevious: false,
     currentIndex: -1,
-    totalCandidates: 0
+    totalCandidates: 0,
+    currentPrelimData: undefined
 };
 
 
@@ -22,6 +24,7 @@ var PrelimRoundStore = Reflux.createStore({
   },
   onStart: function(){
       store.list = [];
+      store.listEntity = [];
 
       var candidates = api.all('candidates');
 
@@ -32,6 +35,7 @@ var PrelimRoundStore = Reflux.createStore({
               var candidate = candidateEntity.data();
               candidate._entity = candidateEntity;
               store.list.push(candidate);
+              store.listEntity.push(candidateEntity);
           });
           store.totalCandidates = store.list.length;
           if(store.totalCandidates > 0)
@@ -41,14 +45,8 @@ var PrelimRoundStore = Reflux.createStore({
           PrelimRoundStore.updateStoreData();
       });
 
-
-
   },
   updateStoreData: function(){
-
-
-
-
       if(store.currentIndex < (store.totalCandidates - 1))
       {
           store.hasNext = true;
@@ -57,7 +55,6 @@ var PrelimRoundStore = Reflux.createStore({
       {
           store.hasNext = false;
       }
-
 
       if(store.currentIndex > 0)
       {
@@ -70,14 +67,24 @@ var PrelimRoundStore = Reflux.createStore({
       if(store.currentIndex >= 0 && store.currentIndex < store.totalCandidates)
       {
           store.currentCandidate = store.list[store.currentIndex];
+          var currentEntity = store.listEntity[store.currentIndex];
+          SessionStore.getUserData().then(function(user){
+              currentEntity.one('prelimdata', user.id).get().then(function(response){
+                  var entity = response.body();
+                  store.currentPrelimData = entity.data();
+                  PrelimRoundStore.trigger(store);
+              });
+          });
       }
 
 
-      PrelimRoundStore.trigger(store);
+
+
+
+
 
   },
   onNext: function () {
-
       store.currentIndex ++;
       PrelimRoundStore.updateStoreData();
   },

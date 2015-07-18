@@ -11,6 +11,7 @@
   "mainOutput": "main",
   "dependencies": {
     "axios": "^0.5.4",
+    "bluebird": "^2.9.34",
     "bootbox": "^4.4.0",
     "bootstrap": "^3.3.5",
     "classnames": "^2.1.3",

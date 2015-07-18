@@ -55,7 +55,11 @@ module.exports = function (sequelize) {
         },
         representation: {
             type: Sequelize.STRING
-        }
+        },
+        finalist: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0
+        },
     }, {
         freezeTableName: true // Model tableName will be the same as the model name
     });
@@ -95,13 +99,34 @@ module.exports = function (sequelize) {
     Judge.hasMany(Preliminaries,{onUpdate:'CASCADE', onDelete:'CASCADE'});
     Preliminaries.sync({force: false});
 
+    var Finalist = sequelize.define('finalist', {
+        id: {
+            type: Sequelize.INTEGER,
+            field: 'id',
+            primaryKey: true,
+            autoIncrement: true
+        },
+        finalinterview: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0
+        },
+        beautypoisecharm: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0
+        }
+    }, {
+        freezeTableName: true // Model tableName will be the same as the model name
+    });
 
-
+    Candidates.hasMany(Finalist,{onUpdate:'CASCADE', onDelete:'CASCADE'});
+    Judge.hasMany(Finalist,{onUpdate:'CASCADE', onDelete:'CASCADE'});
+    Finalist.sync({force: false});
 
 
     return {
         Judge : Judge,
         Preliminaries:Preliminaries,
-        Candidates:Candidates
+        Candidates:Candidates,
+        Finalist:Finalist
     };
 }

@@ -7,7 +7,8 @@ var router = express.Router();
 router.get('/user', function(req, res,next) {
 
     var user  ={
-        judgeNo : req.user.judgeNo
+        judgeNo : req.user.judgeNo,
+        id:req.user.id
     }
 
     if(user.judgeNo===999)
