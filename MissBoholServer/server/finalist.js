@@ -7,6 +7,7 @@ var Promise = require("bluebird");
 module.exports = function (sequelize,Candidates,Judges,Finalist) {
 
 
+
     router.get('/', function(req, res,next) {
 
         var resetfinalist=req.query.resetfinalist;

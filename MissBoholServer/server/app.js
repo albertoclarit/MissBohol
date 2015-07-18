@@ -141,7 +141,7 @@ app.use(passport.session());
 var api= require('./api')(passport);
 var users = require('./users');
 var judges = require('./judges')(db.Judge);
-var candidates = require('./candidates')(sequelize,db.Candidates,db.Preliminaries);
+var candidates = require('./candidates')(sequelize,db.Candidates,db.Preliminaries,db.Finalist);
 var preliminaries = require('./preliminaries')(sequelize,db.Candidates,db.Judge,db.Preliminaries);
 var finalist =  require('./finalist')(sequelize,db.Candidates,db.Judge,db.Finalist);
 

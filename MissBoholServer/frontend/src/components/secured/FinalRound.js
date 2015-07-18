@@ -2,10 +2,10 @@
 
 var React = require('react/addons');
 var SessionStore = require('../../sessionmanager/SessionStore');
-var FinalRoundActionCreators = require('../../actions/PrelimRoundActionCreators');
-var FinalRoundStore = require('../../stores/PrelimRoundStore');
+var FinalRoundActionCreators = require('../../actions/FinalRoundActionCreators');
+var FinalRoundStore = require('../../stores/FinalRoundStore');
 var Reflux = require('reflux');
-
+var FinalActionCreators = require('../../actions/FinalActionCreators');
 
 
 require('styles/secured/FinalRound.css');
@@ -22,6 +22,20 @@ var FinalRound = React.createClass({
     previous: function(){
         FinalRoundActionCreators.Previous();
     },
+    finalinterviewChanged: function(){
+        var newValue = React.findDOMNode(this.refs.finalinterview).value;
+        var state = this.state.currentFinalData;
+        state.finalinterview = newValue;
+        FinalActionCreators.EditPreliminary(state);
+        this.setState(this.state);
+    },
+    beautypoisecharmChanged: function(){
+        var newValue = React.findDOMNode(this.refs.beautypoisecharm).value;
+        var state = this.state.currentFinalData;
+        state.beautypoisecharm = newValue;
+        FinalActionCreators.EditPreliminary(state);
+        this.setState(this.state);
+    },
     render: function () {
 
         var candidateprofile = null;
@@ -33,50 +47,39 @@ var FinalRound = React.createClass({
 
 
 
-        if(this.state.currentPrelimData){
+        if(this.state.currentFinalData){
 
-            var swimsuitgown = [];
-            for(var i = 0; i <= 25; i++)
+            var finalinterview = [];
+            for(var i = 0; i <= 50; i++)
             {
-                swimsuitgown.push(
+                finalinterview.push(
                     (<option value = {i} key={i}>{i}</option>)
                 );
             }
 
-            var intelligence = [];
-            for(i = 0; i <= 30; i++)
+            var beautypoisecharm = [];
+            for(i = 0; i <= 50; i++)
             {
-                intelligence.push(
+                beautypoisecharm.push(
                     (<option value = {i} key={i}>{i}</option>)
                 );
             }
 
             prelimData = (
                 <div className="form-horizontal">
-                    <div className="form-group">
-                        <label>Talent Competition</label>
-                        <input type="text" className="form-control" readOnly value={this.state.currentPrelimData.talent}/>
-                    </div>
 
                     <div className="form-group">
-                        <label>Swimsuit Competition</label>
-                        <select ref="swimsuit" className="form-control" onChange={this.swimsuitChanged} value={this.state.currentPrelimData.swimsuit}>
-                            {swimsuitgown}
+                        <label>Final Interview</label>
+                        <select ref="finalinterview" className="form-control" onChange={this.finalinterviewChanged} value={this.state.currentFinalData.finalinterview}>
+                            {finalinterview}
                         </select>
                     </div>
                     <div className="form-group">
                         <label>Gown</label>
-                        <select ref="gown" className="form-control" onChange={this.gownChanged} value={this.state.currentPrelimData.gown}>
-                            {swimsuitgown}
+                        <select ref="beautypoisecharm" className="form-control" onChange={this.beautypoisecharmChanged} value={this.state.currentFinalData.beautypoisecharm}>
+                            {beautypoisecharm}
                         </select>
                     </div>
-                    <div className="form-group">
-                        <label>Wit and Intelligence</label>
-                        <select ref="witintelligence" className="form-control" onChange={this.witintelligenceChanged} value={this.state.currentPrelimData.witintelligence}>
-                            {intelligence}
-                        </select>
-                    </div>
-
                 </div>
             );
 
@@ -135,7 +138,7 @@ var FinalRound = React.createClass({
 
         return (
             <div className="PrelimRound">
-                <legend>Preliminary Round</legend>
+                <legend>Final Round</legend>
                 {candidateprofile}
             </div>
         );

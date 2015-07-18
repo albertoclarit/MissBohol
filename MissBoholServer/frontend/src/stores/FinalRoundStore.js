@@ -13,7 +13,7 @@ var store = {
     hasPrevious: false,
     currentIndex: -1,
     totalCandidates: 0,
-    currentPrelimData: undefined
+    currentFinalData: undefined
 };
 
 
@@ -28,7 +28,9 @@ var FinalRoundStore = Reflux.createStore({
 
         var candidates = api.all('candidates');
 
-        candidates.getAll().then(function(response) {
+        candidates.getAll({
+            finalist: true
+        }).then(function(response) {
             var candidateList = response.body();
 
             candidateList.forEach(function(candidateEntity) {
@@ -42,7 +44,7 @@ var FinalRoundStore = Reflux.createStore({
             {
                 store.currentIndex = 0;
             }
-            PrelimRoundStore.updateStoreData();
+            FinalRoundStore.updateStoreData();
         });
 
     },
@@ -69,10 +71,10 @@ var FinalRoundStore = Reflux.createStore({
             store.currentCandidate = store.list[store.currentIndex];
             var currentEntity = store.listEntity[store.currentIndex];
             SessionStore.getUserData().then(function(user){
-                currentEntity.one('prelimdata', user.id).get().then(function(response){
+                currentEntity.one('finaldata', user.id).get().then(function(response){
                     var entity = response.body();
-                    store.currentPrelimData = entity.data();
-                    PrelimRoundStore.trigger(store);
+                    store.currentFinalData = entity.data();
+                    FinalRoundStore.trigger(store);
                 });
             });
         }
@@ -86,11 +88,11 @@ var FinalRoundStore = Reflux.createStore({
     },
     onNext: function () {
         store.currentIndex ++;
-        PrelimRoundStore.updateStoreData();
+        FinalRoundStore.updateStoreData();
     },
     onPrevious: function(){
         store.currentIndex --;
-        PrelimRoundStore.updateStoreData();
+        FinalRoundStore.updateStoreData();
     }
 
 });

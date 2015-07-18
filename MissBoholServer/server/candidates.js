@@ -3,19 +3,40 @@ var express = require('express');
 var router = express.Router();
 var Promise = require("bluebird");
 
-module.exports = function (sequelize,Candidates,Preliminaries) {
+module.exports = function (sequelize,Candidates,Preliminaries,Finalist) {
 
 
 
     // get the list of candidates
     router.get('/', function(req, res,next) {
-        Candidates.findAll({
-            order: [['candidateNo', 'ASC']]
-        }).then(function(candidates){
-            res.json(candidates);
-        }).catch(function(error){
-            res.status(404);
-        });
+
+
+        if(req.query.finalist){
+
+            Candidates.findAll({
+                where: {
+                    finalist : {
+                        $ne: 0
+                    }
+                },
+                order: [['candidateNo', 'ASC']]
+            }).then(function(candidates){
+                res.json(candidates);
+            }).catch(function(error){
+                res.status(404);
+            });
+        }
+
+        else {
+            Candidates.findAll({
+                order: [['candidateNo', 'ASC']]
+            }).then(function(candidates){
+                res.json(candidates);
+            }).catch(function(error){
+                res.status(404);
+            });
+        }
+
     });
 
 
@@ -90,6 +111,28 @@ module.exports = function (sequelize,Candidates,Preliminaries) {
                 });
         }).then(function(preliminary){
                 res.json(preliminary);
+            })
+            .catch(function(error){
+                console.log(error);
+                res.sendStatus(404);
+            });
+    });
+
+
+    router.get('/:id/finaldata/:judgeid', function(req, res,next) {
+
+
+        return new Promise(function (resolve, reject) {
+            Candidates.findById(req.params.id).then(resolve).catch(reject);
+        }).then(function(candidate){
+                return   Finalist.findOne({
+                    where:{
+                        candidateId: candidate.id,
+                        judgeId : req.params.judgeid
+                    }
+                });
+            }).then(function(finalist){
+                res.json(finalist);
             })
             .catch(function(error){
                 console.log(error);
