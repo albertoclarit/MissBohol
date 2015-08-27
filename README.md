@@ -6,7 +6,7 @@ MissBohol
 
 How to run
 - On your terminal
-- git clone https://git.graystem.com/albert.oclarit/missbohol.git  missbohol
+- git clone https://github.com/albertoclarit/MissBohol.git  missbohol
 - cd missbohol
 - cd MissBoholServer
 - cd frontend
