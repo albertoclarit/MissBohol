@@ -23,5 +23,7 @@ This assume you have installed grunt-cli
 
 You can copy the sqlite database at server/dbstart which contains a predefined data
 
+Default usernames and Password. Judge 999 has admin privileges
 
 
+![alt text](users.png "Users")
